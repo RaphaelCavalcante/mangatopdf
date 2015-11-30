@@ -12,24 +12,22 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class GenerateMangaPDF {
-	
-	private String mangaPath;
-	private String title;
-	public GenerateMangaPDF(String mangaPath, String title){
-		this.mangaPath= mangaPath;
-		this.title = title;
+	private Manga mangaFile;
+
+	public GenerateMangaPDF(Manga mangaFile) {
+		this.mangaFile = mangaFile;
 	}
+
 	@SuppressWarnings({ "unused", "rawtypes" })
-	public void createPdf(String fileName){
+	public void createPdf(String fileName) {
 		Document pdf = new Document();
 		try {
 
 			PdfWriter writer = PdfWriter.getInstance(pdf, new FileOutputStream(
 					fileName));
 
-			Manga manga = new Manga(title, mangaPath);
+			Iterator it = mangaFile.getMangaVolumes().iterator();
 
-			Iterator it = manga.getMangaVolumes().iterator();
 			List<MangaPage> pages = new ArrayList<MangaPage>();
 
 			while (it.hasNext()) {
@@ -54,14 +52,15 @@ public class GenerateMangaPDF {
 
 		pdf.close();
 	}
-	
+
 	@SuppressWarnings("rawtypes")
-	public List<MangaPage> getChapsFiles(List<MangaChapter> chaps){
-		Iterator it= chaps.iterator();
-		List <MangaPage> pages=new ArrayList<MangaPage>();
-		while (it.hasNext()){
-			MangaChapter chapter = (MangaChapter)it.next();
-			pages=((MangaChapter)it.next()).compilePageFromChapter(chapter, pages);
+	public List<MangaPage> getChapsFiles(List<MangaChapter> chaps) {
+		Iterator it = chaps.iterator();
+		List<MangaPage> pages = new ArrayList<MangaPage>();
+		while (it.hasNext()) {
+			MangaChapter chapter = (MangaChapter) it.next();
+			pages = ((MangaChapter) it.next()).compilePageFromChapter(chapter,
+					pages);
 		}
 		return pages;
 	}
