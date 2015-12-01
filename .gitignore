@@ -1,2 +1,4 @@
 */test_artifact/
 *.jar
+*/bin/*
+*.class
