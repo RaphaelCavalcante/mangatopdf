@@ -18,7 +18,7 @@ public class GenerateMangaPDF {
 		this.mangaFile = mangaFile;
 	}
 
-	@SuppressWarnings({ "unused", "rawtypes" })
+	@SuppressWarnings({ "unused" })
 	public void createPdf(String fileName) {
 		Document pdf = new Document();
 		try {
@@ -26,13 +26,12 @@ public class GenerateMangaPDF {
 			PdfWriter writer = PdfWriter.getInstance(pdf, new FileOutputStream(
 					fileName));
 
-			Iterator it = mangaFile.getMangaVolumes().iterator();
+			Iterator <MangaVolume> it = mangaFile.getMangaVolumes().iterator();
 
 			List<MangaPage> pages = new ArrayList<MangaPage>();
 
 			while (it.hasNext()) {
-				List<MangaChapter> chaps = ((MangaVolume) it.next())
-						.getVolumeChapters();
+				List<MangaChapter> chaps = (it.next()).getVolumeChapters();
 				pages.addAll(getChapterFiles(chaps));
 			}
 
@@ -41,7 +40,11 @@ public class GenerateMangaPDF {
 				Image img = page.getMangaPageImage();
 				
 				img.scaleToFit(pdf.getPageSize().getWidth(), pdf.getPageSize().getHeight()-40);
-				img.setAbsolutePosition(pdf.getPageSize().getLeft(), img.getAbsoluteY());
+				if(img.getWidth() > img.getHeight()){
+					img.setRotationDegrees(90);
+				}else{
+					img.setAbsolutePosition(pdf.getPageSize().getLeft()+10, img.getAbsoluteY());
+				}
 				pdf.add(img);
 				pdf.newPage();
 			}

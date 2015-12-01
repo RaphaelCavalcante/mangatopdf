@@ -4,14 +4,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Manga extends MangaAbstract{
+import com.home.rhounsell.mangatopdf.interfaces.IManga;
+
+public class Manga extends MangaAbstract implements IManga{
 	private List<MangaVolume> mangaVol = null;
 	
 	public Manga(String title, String pathToMangaDirectory){
 		setTitle(title);
 		loadManga(pathToMangaDirectory);
 	}
-	private void loadManga(String pathToMangaDirectory){
+	@Override
+	public void loadManga(String pathToMangaDirectory) {
 		File manga=new File(pathToMangaDirectory);
 		File[] volPaths= manga.listFiles();
 		mangaVol = new ArrayList<MangaVolume>();
@@ -20,10 +23,14 @@ public class Manga extends MangaAbstract{
 			mangaVol.add(volume);
 		}
 	}
-	public List<MangaVolume> getMangaVolumes(){
+
+	@Override
+	public List<MangaVolume> getMangaVolumes() {
 		return this.mangaVol;
 	}
-	public int getVolumes(){
+
+	@Override
+	public int getVolumes() {
 		return this.mangaVol.size();
 	}
 }

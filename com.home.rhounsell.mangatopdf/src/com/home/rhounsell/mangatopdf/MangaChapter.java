@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.home.rhounsell.mangatopdf.interfaces.IChapter;
 import com.itextpdf.text.BadElementException;
 
-public class MangaChapter extends MangaAbstract {
+public class MangaChapter extends MangaAbstract implements IChapter{
 	private File chapterDirectory;
 	private int chapterNumber;
 
@@ -17,10 +18,12 @@ public class MangaChapter extends MangaAbstract {
 		this.chapterNumber = chapterNumber;
 	}
 
+	@Override
 	public int getChapterNumber() {
 		return this.chapterNumber;
 	}
 
+	@Override
 	public List <MangaPage> getChapterPages() {
 		final List <MangaPage> mangaPages = new ArrayList<MangaPage>();
 		
@@ -42,7 +45,7 @@ public class MangaChapter extends MangaAbstract {
 		}
 		return mangaPages;
 	}
-
+	@Override
 	public List<MangaPage> compilePageFromChapter(MangaChapter chapter,
 			List<MangaPage> pages) {
 		Iterator <MangaPage> it = chapter.getChapterPages().iterator();
