@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import java.io.File;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,12 +22,12 @@ public class MangaChapterTest {
 	}
 	@Test
 	public void mangaPagesTest() {
-		List<MangaPage> pages=chapter.getChapterPages();
+		Set <MangaPage>pages=chapter.getChapterPages();
 		assertFalse(pages.isEmpty());
 	}
 	@Test
 	public void mangaPagesQuantityTest(){
-		List<MangaPage> pages=chapter.getChapterPages();
+		Set <MangaPage>pages=chapter.getChapterPages();
 		assertEquals(PAGES, pages.size());
 	}
 }

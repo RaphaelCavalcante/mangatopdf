@@ -33,7 +33,7 @@ public class GenerateMangaPDF {
 			while (it.hasNext()) {
 				List<MangaChapter> chaps = ((MangaVolume) it.next())
 						.getVolumeChapters();
-				pages.addAll(getChapsFiles(chaps));
+				pages.addAll(getChapterFiles(chaps));
 			}
 
 			pdf.open();
@@ -54,7 +54,7 @@ public class GenerateMangaPDF {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List<MangaPage> getChapsFiles(List<MangaChapter> chaps) {
+	private List<MangaPage> getChapterFiles(List<MangaChapter> chaps) {
 		Iterator it = chaps.iterator();
 		List<MangaPage> pages = new ArrayList<MangaPage>();
 		while (it.hasNext()) {

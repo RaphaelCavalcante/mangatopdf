@@ -66,6 +66,7 @@ public class MangaPage {
 	}
 	
 	public MangaPage[] SplitMangaPage(Image img){
+		//TODO
 		return null;
 	}
 	
