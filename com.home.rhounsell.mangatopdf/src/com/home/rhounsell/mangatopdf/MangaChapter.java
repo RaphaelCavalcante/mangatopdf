@@ -2,10 +2,9 @@ package com.home.rhounsell.mangatopdf;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import com.itextpdf.text.BadElementException;
 
@@ -22,8 +21,8 @@ public class MangaChapter extends MangaAbstract {
 		return this.chapterNumber;
 	}
 
-	public Set <MangaPage> getChapterPages() {
-		final Set <MangaPage> mangaPages = new HashSet<MangaPage>();
+	public List <MangaPage> getChapterPages() {
+		final List <MangaPage> mangaPages = new ArrayList<MangaPage>();
 		
 		File[] list = chapterDirectory.listFiles();
 		for (int index = 0; index < list.length; index++) {
@@ -46,10 +45,9 @@ public class MangaChapter extends MangaAbstract {
 
 	public List<MangaPage> compilePageFromChapter(MangaChapter chapter,
 			List<MangaPage> pages) {
-		@SuppressWarnings("rawtypes")
-		Iterator it = chapter.getChapterPages().iterator();
+		Iterator <MangaPage> it = chapter.getChapterPages().iterator();
 		while (it.hasNext()) {
-			pages.add(((MangaPage) it.next()));
+			pages.add(it.next());
 		}
 		return pages;
 	}

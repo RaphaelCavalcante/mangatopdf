@@ -39,8 +39,9 @@ public class GenerateMangaPDF {
 			pdf.open();
 			for (MangaPage page : pages) {
 				Image img = page.getMangaPageImage();
-				img.scaleToFit(pdf.getPageSize().getWidth(), pdf.getPageSize()
-						.getHeight());
+				
+				img.scaleToFit(pdf.getPageSize().getWidth(), pdf.getPageSize().getHeight()-40);
+				img.setAbsolutePosition(pdf.getPageSize().getLeft(), img.getAbsoluteY());
 				pdf.add(img);
 				pdf.newPage();
 			}
